@@ -31,7 +31,7 @@ def load_toml_file(file) -> dict:
 
 
 # TODO: Check for existing alarm files before start!
-def main(arguments):
+async def main(arguments):
     clients: list = []
 
     parser = argparse.ArgumentParser(prog='openDTUexporter', description='', add_help=False)
@@ -61,16 +61,23 @@ def main(arguments):
             )
         )
 
-    for c in clients:
-        c.client_ping()
-        time.sleep(1)
+    # without asyncio
+    # for c in clients:
+    #     c.client_ping()
+    #     time.sleep(1)
 
-    # while True:
-    #     time.sleep(2)
+    tasks: list = []
+    for client in clients:
+        task = asyncio.create_task(client.client_ping_())
+        tasks.append(task)
+
+    while True:
+        await asyncio.sleep(2)
 
 
 if __name__ == '__main__':
     try:
-        exit(main(argv[1:]))
+        asyncio.run(main(argv[1:]))
+        # exit(main(argv[1:]))      # without asyncio
     except KeyboardInterrupt as err:
         print("Program gracefully ended by user key press")

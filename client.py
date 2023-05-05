@@ -8,7 +8,7 @@ from sys import stdout
 
 formatter = logging.Formatter("%(message)s")
 console = logging.getLogger('ipm.clients')
-console.setLevel(logging.DEBUG)
+console.setLevel(logging.INFO)
 chandler = logging.StreamHandler(stdout)
 chandler.setLevel(logging.DEBUG)
 chandler.setFormatter(formatter)
@@ -40,6 +40,7 @@ class Clients:
 
     async def client_ping_(self) -> bool:
 
+        console.debug(f"Ping task started: {self.address} every {self.interval}s")
         while True:
             res = self.client_ping()
             await asyncio.sleep(self.interval)
@@ -51,7 +52,7 @@ class Clients:
         #   -n: number of echo request messages
         #   -t: endless sending echo request messages
         #   -w: timeout to wait for reply message in ms
-        command = ["ping", param, "1", "-w", "1", address]
+        command = ["ping", param, "3", "-w", "1", address]
 
         # output:
         #   - subprocess.DEVNULL ... pipe output to /dev/null

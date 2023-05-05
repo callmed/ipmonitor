@@ -7,6 +7,8 @@ alarm_dir = ""
 # directory for output file
 output_dir = ""
 
+# amount of echo request messages to send with each ping command (default=3)
+send_pkg = 3
 
 # Add new client_group for more clients to bing
 [[client_group]]
