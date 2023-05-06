@@ -1,25 +1,33 @@
-# command output in file
-logfile = "output.txt"
+[output]
+# directory to put the output file
+dir = ""
+# output filename
+file = "output.txt"
 # print only missing clients
 print_all = true
 # directory for alarm files
-alarm_dir = ""
-# directory for output file
-output_dir = ""
 
+[alarm]
+# directory to put the output file
+dir = ""
+
+
+[command]
 # amount of echo request messages to send with each ping command (default=3)
 send_pkg = 3
 
-# Add new client_group for more clients to bing
+#
+### Add new client_group for more clients to bing
+#
 [[client_group]]
 address = "ATGRZSI511500"
 interval = 5
 alarmfile = "ATGRZSI511500.alarm"
 
-#[[client_group]]
-#address = "ATGRZWV601314.avl01.avlcorp.lan"
-#interval = 3
-#alarmfile = ""
+[[client_group]]
+address = "ATGRZWV601314.avl01.avlcorp.lan"
+interval = 3
+alarmfile = ""
 
 [[client_group]]
 address = "10.0.0.138"
